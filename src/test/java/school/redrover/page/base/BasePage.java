@@ -20,8 +20,8 @@ public abstract class BasePage extends BaseModel {
         return new HomePage(getDriver());
     }
 
-    public String getCurrentUrl() {
-        return getDriver().getCurrentUrl();
-    }
+//    public String getCurrentUrl() {
+//        return getDriver().getCurrentUrl();
+//    }
 
 }

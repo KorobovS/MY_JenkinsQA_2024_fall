@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 public class Main {
     public static void main(String[] args) {
+        Object object = new Object();
+
         WebDriver driver = null;
 
         NewBaseModel baseModel = new NewBaseModel(driver);
@@ -26,6 +28,25 @@ public class Main {
         baseProjectPage.getWait10();
         baseProjectPage.gotoHomePage();
         baseProjectPage.editDescription("text");
+
+        NewBaseConfigPage baseConfigPage = new NewBaseConfigPage(driver);
+        baseConfigPage.getDriver();
+        baseConfigPage.getWait2();
+        baseConfigPage.getWait5();
+        baseConfigPage.getWait10();
+        baseConfigPage.gotoHomePage();
+        baseConfigPage.enterDescription("new text");
+        baseConfigPage.clickSaveButton();
+        baseConfigPage.createProjectPage();
+
+        NewBaseCreatePage baseCreatePage = new NewBaseCreatePage(driver);
+        baseCreatePage.getDriver();
+        baseCreatePage.getWait2();
+        baseCreatePage.getWait5();
+        baseCreatePage.getWait10();
+        baseCreatePage.gotoHomePage();
+        baseCreatePage.clickOkButton();
+        baseCreatePage.selectTypeProject("type project");
     }
 
     static class NewBaseModel extends BaseModel {
@@ -46,5 +67,20 @@ public class Main {
         }
     }
 
+    static class NewBaseConfigPage extends BaseConfigPage<NewBaseConfigPage, NewBaseProjectPage> {
+        public NewBaseConfigPage(WebDriver driver) {
+            super(driver);
+        }
 
+        @Override
+        protected NewBaseProjectPage createProjectPage() {
+            return new NewBaseProjectPage(getDriver());
+        }
+    }
+
+    static class NewBaseCreatePage extends BaseCreatePage<NewBaseCreatePage> {
+        public NewBaseCreatePage(WebDriver driver) {
+            super(driver);
+        }
+    }
 }
