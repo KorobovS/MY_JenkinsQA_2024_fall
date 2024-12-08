@@ -8,7 +8,7 @@ import school.redrover.page.CreateNewItemPage;
 
 import java.util.List;
 
-public abstract class BaseProjectPage<Self extends BaseProjectPage<?>> extends BasePage {
+public abstract class BaseProjectPage<Self extends BaseProjectPage<?, ?>, ProjectConfigPage> extends BasePage {
 
     @FindBy(id = "description-link")
     private WebElement descriptionButton;
@@ -56,6 +56,8 @@ public abstract class BaseProjectPage<Self extends BaseProjectPage<?>> extends B
         super(driver);
     }
 
+    protected abstract ProjectConfigPage createProjectConfigPage();
+
     public CreateNewItemPage clickNewItem() {
         newItem.click();
 
@@ -70,64 +72,64 @@ public abstract class BaseProjectPage<Self extends BaseProjectPage<?>> extends B
         return (Self) this;
     }
 
-//    public Self clickSubmitButton() {
-//        submitButton.click();
-//
-//        return (Self) this;
-//    }
-//
-//    public Self clearDescription() {
-//        descriptionButton.click();
-//        descriptionField.clear();
-//        submitButton.click();
-//
-//        return (Self) this;
-//    }
-//
-//    public Self clickPreview() {
-//        previewOption.click();
-//
-//        return (Self) this;
-//    }
-//
-//    public Self renameItem(String newName) {
-//        renameButtonViaSidebar.click();
-//        newNameField.clear();
-//        newNameField.sendKeys(newName);
-//        submitButton.click();
-//        return (Self) this;
-//    }
-//
-//    public String getPreviewDescriptionText() {
-//        return previewDescriptionText.getText();
-//    }
-//
-//    public String getRenameWarningMessage() {
-//        return getWait10().until(ExpectedConditions.visibilityOf(errorMessage)).getText();
-//    }
-//
-//    public String getItemName() {
-//        return getWait10().until(ExpectedConditions.visibilityOf(itemName)).getText();
-//    }
-//
-//    public String getDescription() {
-//        return descriptionText.getText();
-//    }
-//
-//    public String getDescriptionButtonText() {
-//        return descriptionButton.getText();
-//    }
-//
-//    public List<String> getSidebarOptionList() {
-//        return getWait5().until(ExpectedConditions.visibilityOfAllElements(sidebarElementList))
-//                .stream()
-//                .map(WebElement::getText)
-//                .toList();
-//    }
-//
-//    public ProjectConfigPage clickSidebarConfigButton() {
-//        getWait2().until(ExpectedConditions.elementToBeClickable(sidebarConfigureButton)).click();
-//
-//        return createProjectConfigPage();
-//    }
+    public Self clickSubmitButton() {
+        submitButton.click();
+
+        return (Self) this;
+    }
+
+    public Self clearDescription() {
+        descriptionButton.click();
+        descriptionField.clear();
+        submitButton.click();
+
+        return (Self) this;
+    }
+
+    public Self clickPreview() {
+        previewOption.click();
+
+        return (Self) this;
+    }
+
+    public Self renameItem(String newName) {
+        renameButtonViaSidebar.click();
+        newNameField.clear();
+        newNameField.sendKeys(newName);
+        submitButton.click();
+        return (Self) this;
+    }
+
+    public String getPreviewDescriptionText() {
+        return previewDescriptionText.getText();
+    }
+
+    public String getRenameWarningMessage() {
+        return getWait10().until(ExpectedConditions.visibilityOf(errorMessage)).getText();
+    }
+
+    public String getItemName() {
+        return getWait10().until(ExpectedConditions.visibilityOf(itemName)).getText();
+    }
+
+    public String getDescription() {
+        return descriptionText.getText();
+    }
+
+    public String getDescriptionButtonText() {
+        return descriptionButton.getText();
+    }
+
+    public List<String> getSidebarOptionList() {
+        return getWait5().until(ExpectedConditions.visibilityOfAllElements(sidebarElementList))
+                .stream()
+                .map(WebElement::getText)
+                .toList();
+    }
+
+    public ProjectConfigPage clickSidebarConfigButton() {
+        getWait2().until(ExpectedConditions.elementToBeClickable(sidebarConfigureButton)).click();
+
+        return createProjectConfigPage();
+    }
 }
