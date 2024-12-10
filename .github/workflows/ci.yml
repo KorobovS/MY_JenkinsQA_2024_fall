@@ -34,12 +34,3 @@ jobs:
         run: |
           tar -xvf ./jenkins_backup.tar
           chmod -R 777 ./jenkins_backup/var/jenkins_home
-
-      - name: Attach screenshots and reports
-        uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: screenshots-and-report
-          path: |
-            screenshots
-            target/surefire-reports/emailable-report.html
